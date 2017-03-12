@@ -42,14 +42,14 @@ def loops_1a():
     return a list of 10 items, each one a string with exacly one star in it.
     E.g.: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
     """
-    star = ['*']
-    for i in range(9):
+    star = []
+    for i in range(10):
         star.append('*')
     return star
     pass
 
 
-def star_map(i):
+def star_map():
     """Use a map to make stars and bangs.
 
     Using a map, return a list of 10 items, each one a string with exacly
@@ -57,16 +57,13 @@ def star_map(i):
     if it's even. Reuse the is odd function that you've already written.
     E.g.: ["!", "*", "!", "*", "!", "*", "!", "*", "!", "*"]
     """
-    star2 = ['!']
-    if i % 2 == 0:
-        star2.append('*')
-    else:
-        star2.append('!')
-    pass
 
-
-star_bang = list(map(star_map, range(9)))
-print (star_bang)
+    def star_and_bang(i):
+        if i % 2 == 0:
+            return '!'
+        else:
+            return '*'
+    return map(star_and_bang, range(10))
 
 
 def loops_1c(number_of_items=5, symbol="#"):
@@ -77,7 +74,11 @@ def loops_1c(number_of_items=5, symbol="#"):
     a string with exacly one symbol in it.
     E.g.: ['#', '#', '#', '#', '#']
     """
-    pass
+    slash = []
+    while number_of_items > 0:
+        slash.append(symbol)
+        number_of_items -= 1
+    return slash
 
 
 def loops_2():
@@ -98,7 +99,13 @@ def loops_2():
             ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
           ]
     """
-    pass
+    starfield = []
+    for i in range(10):
+        star = []
+        for j in range(10):
+            star.append('*')
+        starfield.append(star)
+    return starfield
 
 
 def loops_3():
@@ -122,7 +129,13 @@ def loops_3():
     TIP: notice that this needs to to return strings of numbers,
          so call str(number) to cast.
     """
-    pass
+    numberfield = []
+    for i in range(10):
+        number = []
+        for j in range(10):
+            number.append(str(i))
+        numberfield.append(number)
+    return numberfield
 
 
 def loops_4():
