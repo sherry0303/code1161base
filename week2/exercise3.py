@@ -85,7 +85,6 @@ def loops_1c(number_of_items=5, symbol="#"):
     return my_list
 
 
-
 def loops_2():
     """Make a big square starfield.
 
@@ -145,6 +144,7 @@ def loops_3():
 
     print(number_square)
     return number_square
+
 
 def loops_4():
     """Make a block of numbers that rises left to right.
@@ -264,8 +264,8 @@ def loops_7():
         right_bound = int((9+1)/2 + i)
         for j in range(0, left_bound):
             row[j] = " "
-        for k in range(right_bound, 9):
-            row[k] = " "
+        for j in range(right_bound, 9):
+            row[j] = " "
         star_pyramid.append(row)
 
     print(star_pyramid)
