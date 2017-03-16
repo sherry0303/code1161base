@@ -9,7 +9,10 @@ def is_odd(a_number):
 
     Look into modulo division using the '%' operator as one way of doing this.
     """
-    pass
+    if a_number % 2 == 1:
+        return True
+    else:
+        return False
 
 
 def fix_it(moves=True, should_move=True):
@@ -23,7 +26,16 @@ def fix_it(moves=True, should_move=True):
     "Duct Tape"
     "No Problem"
     """
-    pass
+    if moves:
+        if should_move:
+            return "No Problem"
+        else:
+            return "Duct Tape"
+    else:
+        if should_move:
+            return "WD-40"
+        else:
+            return "No Problem"
 
 
 def loops_1a():
@@ -33,7 +45,11 @@ def loops_1a():
     return a list of 10 items, each one a string with exacly one star in it.
     E.g.: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
     """
-    pass
+    star_list = []
+    for i in range(10):
+        star_list.append("*")
+    print(star_list)
+    return star_list
 
 
 def star_map():
@@ -44,7 +60,15 @@ def star_map():
     if it's even. Reuse the is odd function that you've already written.
     E.g.: ["!", "*", "!", "*", "!", "*", "!", "*", "!", "*"]
     """
-    pass
+    def star_or_bang(a_number):
+        if is_odd(a_number):
+            return "*"
+        else:
+            return "!"
+
+    result = map(star_or_bang, range(10))
+    print(result)
+    return result
 
 
 def loops_1c(number_of_items=5, symbol="#"):
@@ -55,7 +79,11 @@ def loops_1c(number_of_items=5, symbol="#"):
     a string with exacly one symbol in it.
     E.g.: ['#', '#', '#', '#', '#']
     """
-    pass
+    my_list = []
+    for i in range(number_of_items):
+        my_list.append(symbol)
+    return my_list
+
 
 
 def loops_2():
@@ -76,7 +104,14 @@ def loops_2():
             ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
           ]
     """
-    pass
+    level_1_list = []
+    level_2_list = []
+    for i in range(10):
+        level_1_list.append("*")
+    for j in range(10):
+        level_2_list.append(level_1_list)
+    print(level_2_list)
+    return level_2_list
 
 
 def loops_3():
@@ -100,8 +135,16 @@ def loops_3():
     TIP: notice that this needs to to return strings of numbers,
          so call str(number) to cast.
     """
-    pass
 
+    number_square = []
+    for i in range(10):
+        number_row = []
+        for j in range(10):
+            number_row.append(str(i))
+        number_square.append(number_row)
+
+    print(number_square)
+    return number_square
 
 def loops_4():
     """Make a block of numbers that rises left to right.
@@ -118,7 +161,15 @@ def loops_4():
       ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     ]
     """
-    pass
+    number_square = []
+    for i in range(10):
+        number_row = []
+        for j in range(10):
+            number_row.append(str(j))
+        number_square.append(number_row)
+
+    print(number_square)
+    return number_square
 
 
 def loops_5():
@@ -143,7 +194,15 @@ def loops_5():
         "There are {} green bottles".format(8)
     you'll come to see the pros and cons of each over time.
     """
-    pass
+    number_square = []
+    for i in range(10):
+        coordinates_row = []
+        for j in range(5):
+            coordinates_row.append("(i{}, j{})".format(i, j))
+        number_square.append(coordinates_row)
+
+    print(number_square)
+    return number_square
 
 
 def loops_6():
@@ -166,7 +225,15 @@ def loops_6():
     You can use a variable.
     TIP: look out for the starting condition.
     """
-    pass
+    the_wedge = []
+    for i in range(10):
+        row = []
+        for j in range(i+1):
+            row.append(str(j))
+        the_wedge.append(row)
+
+    print(the_wedge)
+    return the_wedge
 
 
 def loops_7():
@@ -190,7 +257,19 @@ def loops_7():
     This is a hard problem. Use lots of experimentation and draw
     lots of diagrams!
     """
-    pass
+    star_pyramid = []
+    for i in range(5):
+        row = list("*"*9)
+        left_bound = int((9-1)/2 - i)
+        right_bound = int((9+1)/2 + i)
+        for j in range(0, left_bound):
+            row[j] = " "
+        for k in range(right_bound, 9):
+            row[k] = " "
+        star_pyramid.append(row)
+
+    print(star_pyramid)
+    return star_pyramid
 
 
 def lp(some_kind_of_list, exercise_name):
