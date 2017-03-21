@@ -80,12 +80,14 @@ def stubborn_asker(low, high):
     number_given = input("Please give a number between " + str(low) + " and " +
                          str(high) + ": ")
     while number_given < low or number_given > high:
+        print ("The number is not between " + str(low) + " and " + str(high))
         number_given = input("Please give a number between " + str(low) +
                              " and " + str(high) + ": ")
+    print ("Congratulations!")
     return number_given
 
 
-def not_number_rejector():
+def not_number_rejector(message):
     """Ask for a number repeatedly until actually given one.
 
     Ask for a number, and if the response is actually NOT a number (e.g. "cow",
@@ -94,13 +96,15 @@ def not_number_rejector():
     """
     while True:
         try:
-            message = float(input("Please give a number: "))
+            number_given = float(input(message))
+        except ValueError:
+            print("This is not a number.")
         except NameError:
             print("This is not a number.")
             continue
         else:
             break
-    return message
+    return number_given
 
 
 def super_asker(low, high):
@@ -113,14 +117,19 @@ def super_asker(low, high):
         try:
             message = float(input("Please give a number between " +
                                   str(low) + " and " + str(high) + ": "))
+        except ValueError:
+            print("This is not a number.")
         except NameError:
             print("This is not a number.")
             continue
         else:
             while message < low or message > high:
+                print ("The number is not between " + str(low) + " and " +
+                       str(high))
                 message = input("Please give a number between " + str(low) +
                                 " and " + str(high) + ": ")
             break
+    print ("Congratulations!")
     return message
 
 
@@ -140,6 +149,6 @@ if __name__ == "__main__":
     print("\nstubborn_asker")
     stubborn_asker(30, 45)
     print("\nnot_number_rejector")
-    not_number_rejector()
+    not_number_rejector("Give me a number")
     print("\nsuper_asker")
     super_asker(33, 42)
