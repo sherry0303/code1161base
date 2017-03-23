@@ -99,6 +99,7 @@ def not_number_rejector(message):
             number_given = float(input(message))
         except ValueError:
             print("This is not a number.")
+            continue
         except NameError:
             print("This is not a number.")
             continue
@@ -119,6 +120,7 @@ def super_asker(low, high):
                                   str(low) + " and " + str(high) + ": "))
         except ValueError:
             print("This is not a number.")
+            continue
         except NameError:
             print("This is not a number.")
             continue
