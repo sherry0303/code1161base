@@ -2,7 +2,8 @@
 """Week 3, Exercise 4."""
 from __future__ import division
 from __future__ import print_function
-import math
+# import math
+from exercise1 import super_asker
 # import time
 
 
@@ -27,7 +28,24 @@ def binary_search(low, high, actual_number):
       (You should remove them from the file, not comment them out, the
       tests aren't that smart yet.)
     """
-    pass
+    print ('Guess a number.')
+    binary_dict = {'Guess': '0', 'Tries': '0', 'Target': str(actual_number)}
+    i = 1
+    while i > 0:
+        guess_number = super_asker(low, high)
+        if guess_number == actual_number:
+            print ('WON')
+            binary_dict['Guess'] = str(guess_number)
+            binary_dict['Tries'] = str(i)
+            break
+        elif guess_number > actual_number:
+            print ('Too big. Try again.')
+            high = int(guess_number) - 1
+        else:
+            print ('Too small. Try again.')
+            low = int(guess_number) + 1
+        i += 1
+    return binary_dict
 
 
 if __name__ == "__main__":
