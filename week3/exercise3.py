@@ -4,7 +4,7 @@ Steps on the way to making your own guessing game.
 """
 from __future__ import division
 from __future__ import print_function
-# from exercise1 import not_number_rejector
+from exercise1 import not_number_rejector
 from exercise1 import super_asker
 import random
 
@@ -29,22 +29,28 @@ def advancedGuessingGame():
     purpose if you can!
     """
     print("\nwelcome to the guessing game!")
-    lower_bound = random.randint(0, 9)
-    upper_bound = random.randint(90, 100)
-    print("A number between " + str(lower_bound) + " and " + str(upper_bound))
-    actual_number = random.randint(lower_bound, upper_bound)
-    while True:
-        guessed_number = super_asker(lower_bound, upper_bound)
-        print("you guessed {},".format(guessed_number),)
-        if guessed_number == actual_number:
-            print("WON\nIt was {}".format(actual_number))
-            break
-        elif guessed_number < actual_number:
+    lowerBound = not_number_rejector("Enter a lower bound: ")
+    upperBound = not_number_rejector('Enter an upper bound')
+    if lowerBound > upperBound:
+        temp = lowerBound
+        lowerBound = upperBound
+        upperBound = temp
+    print("OK then, a number between {} and {}".
+          format(lowerBound, upperBound))
+    actualNumber = random.randint(lowerBound, upperBound)
+    guessed = False
+    while not guessed:
+        guessedNumber = super_asker(lowerBound, upperBound)
+        print("you guessed {},".format(guessedNumber))
+        if guessedNumber == actualNumber:
+            print("you got it!! It was {}".format(actualNumber))
+            guessed = True
+        elif guessedNumber < actualNumber:
             print("too small, try again")
-            lower_bound = guessed_number + 1
+            lowerBound = guessedNumber + 1
         else:
             print("too big, try again")
-            upper_bound = guessed_number - 1
+            upperBound = guessedNumber - 1
     return "You got it!"
 
 
