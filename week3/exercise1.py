@@ -77,14 +77,12 @@ def stubborn_asker(low, high):
     Ask for a number, and if the response is outside the bounds keep asking
     until you get a number that you think is OK
     """
-    number_given = input("Please give a number between " + str(low) + " and " +
-                         str(high) + ": ")
-    while number_given < low or number_given > high:
-        print ("The number is not between " + str(low) + " and " + str(high))
-        number_given = input("Please give a number between " + str(low) +
-                             " and " + str(high) + ": ")
-    print ("Congratulations!")
-    return number_given
+    while True:
+        number_given = raw_input("Please give a number between " + str(low) +
+                                 " and " + str(high) + ": ")
+        if low < int(number_given) < high:
+            return number_given
+            break
 
 
 def not_number_rejector(message):
@@ -96,7 +94,7 @@ def not_number_rejector(message):
     """
     while True:
         try:
-            number_given = float(input(message))
+            number_given = int(str(raw_input(message)))
         except ValueError:
             print("This is not a number.")
             continue
@@ -104,8 +102,8 @@ def not_number_rejector(message):
             print("This is not a number.")
             continue
         else:
+            return number_given
             break
-    return number_given
 
 
 def super_asker(low, high):
@@ -116,8 +114,9 @@ def super_asker(low, high):
     """
     while True:
         try:
-            message = float(input("Please give a number between " +
-                                  str(low) + " and " + str(high) + ": "))
+            given_number = int(str(raw_input("Please give a number between " +
+                                             str(low) + " and " +
+                                             str(high) + ": ")))
         except ValueError:
             print("This is not a number.")
             continue
@@ -125,14 +124,14 @@ def super_asker(low, high):
             print("This is not a number.")
             continue
         else:
-            while message < low or message > high:
+            while given_number < low or given_number > high:
                 print ("The number is not between " + str(low) + " and " +
                        str(high))
-                message = input("Please give a number between " + str(low) +
-                                " and " + str(high) + ": ")
+                given_number = int(str(raw_input("Please give a number "
+                                                 "between " + str(low) +
+                                                 " and " + str(high) + ": ")))
+            return given_number
             break
-    print ("Congratulations!")
-    return message
 
 
 if __name__ == "__main__":
@@ -151,6 +150,6 @@ if __name__ == "__main__":
     print("\nstubborn_asker")
     stubborn_asker(30, 45)
     print("\nnot_number_rejector")
-    not_number_rejector("Give me a number")
+    not_number_rejector("Give me a number ")
     print("\nsuper_asker")
     super_asker(33, 42)
