@@ -32,9 +32,7 @@ def advancedGuessingGame():
     lowerBound = not_number_rejector("Enter a lower bound: ")
     upperBound = not_number_rejector('Enter an upper bound')
     if lowerBound > upperBound:
-        temp = lowerBound
-        lowerBound = upperBound
-        upperBound = temp
+        upperBound = not_number_rejector('Enter a bigger upper bound')
     print("OK then, a number between {} and {}".
           format(lowerBound, upperBound))
     actualNumber = random.randint(lowerBound, upperBound)
