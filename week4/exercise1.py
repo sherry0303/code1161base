@@ -28,7 +28,11 @@ def success_is_relative():
     # this depends on excecution context. Take a look at your CWD and remember
     # that it changes.
     # print(path, CWD)
-    pass
+    success_message = open("week1/pySuccessMessage.json", "r")
+    read_message = success_message.read()
+    message = read_message.strip()
+    success_message.close()
+    return message
 
 
 def get_some_details():
@@ -47,13 +51,24 @@ def get_some_details():
          dictionary, you'll need integer indeces for lists, and named keys for
          dictionaries.
     """
-    json_data = open(LOCAL + "/lazyduck.json").read()
-
+    new_dict = {}
+#    json_data = open(LOCAL + "/lazyduck.json").read()
+    with open(LOCAL + "/lazyduck.json") as f:
+        json_data = f.read()
     data = json.loads(json_data)
-    return {"lastName":       None,
-            "password":       None,
-            "postcodePlusID": None
-            }
+    new_dict['lastName'] = str(data['results'][0]['name']['last'])
+    new_dict['password'] = str(data['results'][0]['login']['password'])
+    postcode = int(data['results'][0]['location']['postcode'])
+    id_value = int(data['results'][0]['id']['value'])
+    postcodePlusID = postcode + id_value
+    new_dict['postcodePlusID'] = str(postcodePlusID)
+#    json_data.close()
+    return new_dict
+    # return {
+    #         'lastName': str(data['results'][0]['name']['last']),
+    #         'password': str(data['results'][0]['login']['password']),
+    #         'postcodePlusID': str(postcodePlusID)
+    # }
 
 
 def wordy_pyramid():
@@ -88,7 +103,12 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. ?len=
     """
-    pass
+    wordy_pyramid = []
+    url = 'http://www.setgetgo.com/randomword/get.php?len='
+    for l in range(3, 21, 2) + range(20, 3, -2):
+        word = requests.get(url + str(l))
+        wordy_pyramid.append(str(word.text))
+    return wordy_pyramid
 
 
 def wunderground():
@@ -103,7 +123,7 @@ def wunderground():
          variable and then future access will be easier.
     """
     base = "http://api.wunderground.com/api/"
-    api_key = "YOUR KEY - REGISTER TO GET ONE"
+    api_key = "2ad14609c4e65cdf"
     country = "AU"
     city = "Sydney"
     template = "{base}/{key}/conditions/q/{country}/{city}.json"
@@ -111,11 +131,12 @@ def wunderground():
     r = requests.get(url)
     the_json = json.loads(r.text)
     obs = the_json['current_observation']
-
-    return {"state":           None,
-            "latitude":        None,
-            "longitude":       None,
-            "local_tz_offset": None}
+    location = {}
+    location['state'] = str(obs['display_location']['state'])
+    location['latitude'] = str(obs['display_location']['latitude'])
+    location['longitude'] = str(obs['display_location']['longitude'])
+    location['local_tz_offset'] = str(obs['local_tz_offset'])
+    return location
 
 
 def diarist():
@@ -131,7 +152,12 @@ def diarist():
     TIP: remember to commit 'lasers.pew' and push it to your repo, otherwise
          the test will have nothing to look at.
     """
-    pass
+    with open(LOCAL + '/Trispokedovetiles(laser).gcode') as f:
+        laser = f.read()
+    switch_num = laser.count('M10 P1')
+    lasers = open(LOCAL + 'lasers.pew', 'w')
+    lasers.write(str(switch_num))
+    lasers.close()
 
 
 if __name__ == "__main__":
