@@ -52,7 +52,6 @@ def get_some_details():
          dictionaries.
     """
     new_dict = {}
-#    json_data = open(LOCAL + "/lazyduck.json").read()
     with open(LOCAL + "/lazyduck.json") as f:
         json_data = f.read()
     data = json.loads(json_data)
@@ -61,14 +60,8 @@ def get_some_details():
     postcode = int(data['results'][0]['location']['postcode'])
     id_value = int(data['results'][0]['id']['value'])
     postcodePlusID = postcode + id_value
-    new_dict['postcodePlusID'] = str(postcodePlusID)
-#    json_data.close()
+    new_dict['postcodePlusID'] = postcodePlusID
     return new_dict
-    # return {
-    #         'lastName': str(data['results'][0]['name']['last']),
-    #         'password': str(data['results'][0]['login']['password']),
-    #         'postcodePlusID': str(postcodePlusID)
-    # }
 
 
 def wordy_pyramid():
@@ -133,9 +126,9 @@ def wunderground():
     obs = the_json['current_observation']
     location = {}
     location['state'] = str(obs['display_location']['state'])
-    location['latitude'] = str(obs['display_location']['latitude'])
-    location['longitude'] = str(obs['display_location']['longitude'])
-    location['local_tz_offset'] = str(obs['local_tz_offset'])
+    location['latitude'] = float(obs['display_location']['latitude'])
+    location['longitude'] = float(obs['display_location']['longitude'])
+    location['local_tz_offset'] = int(obs['local_tz_offset'])
     return location
 
 
