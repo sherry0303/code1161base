@@ -155,7 +155,7 @@ def diarist():
     with open(LOCAL + '/Trispokedovetiles(laser).gcode') as f:
         laser = f.read()
     switch_num = laser.count('M10 P1')
-    lasers = open(LOCAL + 'lasers.pew', 'w')
+    lasers = open(LOCAL + '/lasers.pew', 'w')
     lasers.write(str(switch_num))
     lasers.close()
 
