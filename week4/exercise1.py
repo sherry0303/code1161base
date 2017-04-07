@@ -28,7 +28,11 @@ def success_is_relative():
     # this depends on excecution context. Take a look at your CWD and remember
     # that it changes.
     # print(path, CWD)
-    pass
+    success_message = open("week1/pySuccessMessage.json", "r")
+    message = success_message.read().strip()
+    success_message.close()
+
+    return message
 
 
 def get_some_details():
@@ -48,11 +52,19 @@ def get_some_details():
          dictionaries.
     """
     json_data = open(LOCAL + "/lazyduck.json").read()
+    # print(type(json_data))
 
     data = json.loads(json_data)
-    return {"lastName":       None,
-            "password":       None,
-            "postcodePlusID": None
+
+    lastName = data["results"][0]["name"]["last"]
+    password = data["results"][0]["login"]["password"]
+    postcode = data["results"][0]["location"]["postcode"]
+    id_value = data["results"][0]["id"]["value"]
+    postcodePlusID = int(postcode) + int(id_value)
+
+    return {"lastName":       lastName,
+            "password":       password,
+            "postcodePlusID": postcodePlusID
             }
 
 
@@ -88,7 +100,17 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. ?len=
     """
-    pass
+    pyramid = []
+    word_generator_url = "http://www.setgetgo.com/randomword/get.php"
+    for i in range(3, 21, 2):
+        r = requests.get(word_generator_url + "?len=" + str(i))
+        pyramid.append(r.text)
+    for i in range(20, 3, -2):
+        r = requests.get(word_generator_url + "?len=" + str(i))
+        pyramid.append(r.text)
+
+    # print(pyramid)
+    return pyramid
 
 
 def wunderground():
@@ -103,7 +125,7 @@ def wunderground():
          variable and then future access will be easier.
     """
     base = "http://api.wunderground.com/api/"
-    api_key = "YOUR KEY - REGISTER TO GET ONE"
+    api_key = "d39d6941946bf982"
     country = "AU"
     city = "Sydney"
     template = "{base}/{key}/conditions/q/{country}/{city}.json"
@@ -111,11 +133,15 @@ def wunderground():
     r = requests.get(url)
     the_json = json.loads(r.text)
     obs = the_json['current_observation']
+    state = obs["display_location"]["state"]
+    latitude = obs["display_location"]["latitude"]
+    longitude = obs["display_location"]["longitude"]
+    local_tz_offset = obs["local_tz_offset"]
 
-    return {"state":           None,
-            "latitude":        None,
-            "longitude":       None,
-            "local_tz_offset": None}
+    return {"state":           state,
+            "latitude":        latitude,
+            "longitude":       longitude,
+            "local_tz_offset": local_tz_offset}
 
 
 def diarist():
@@ -131,7 +157,15 @@ def diarist():
     TIP: remember to commit 'lasers.pew' and push it to your repo, otherwise
          the test will have nothing to look at.
     """
-    pass
+
+    laser = open("Trispokedovetiles(laser).gcode", "r")
+    data_laser = laser.read()
+    times_laser = data_laser.count("M10 P1")
+    laser.close()
+    switch_laser = open("lasers.pew", "w")
+    switch_laser.write(str(times_laser))
+    switch_laser.close()
+    return times_laser
 
 
 if __name__ == "__main__":

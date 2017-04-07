@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
 """Get the latest version of the tests.
-
 Goes to github and downloads the tests.
 """
 import os
