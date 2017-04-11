@@ -57,7 +57,6 @@ def star_map():
     if it's even. Reuse the is odd function that you've already written.
     E.g.: ["!", "*", "!", "*", "!", "*", "!", "*", "!", "*"]
     """
-
     def star_and_bang(i):
         if i % 2 == 0:
             return '!'
