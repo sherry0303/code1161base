@@ -33,7 +33,8 @@ from __future__ import print_function
 # move on, and eventually delete this function. (And this comment!)
 def do_bunch_of_bad_things():
     """Right-angled triangle details and time countdown."""
-    countdown('Getting ready to start in ', 9, 1, "Let's go!")
+    for i in countdown('Getting ready to start in ', 9, 1, "Let's go!"):
+        print (i)
     triangle = {"base": 3, "height": 4}
     triangle["hypotenuse"] = calculate_hypotenuse(triangle['base'],
                                                   triangle['height'])
@@ -47,9 +48,15 @@ def do_bunch_of_bad_things():
 # It should say something different in the last message.
 def countdown(message, start, stop, completion_message):
     """countdown."""
-    for i in range(start, stop - 1, -1):
-        print(message + ' ' + str(i))
-    print(completion_message)
+    countdown_message = []
+    if start < stop:
+        temp = stop
+        stop = start
+        start = temp
+    for i in range(start, stop, -1):
+        countdown_message.append(message + ' ' + str(i))
+    countdown_message.append(completion_message)
+    return countdown_message
 
 
 # TRIANGLES
