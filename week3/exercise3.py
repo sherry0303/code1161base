@@ -28,7 +28,6 @@ def advancedGuessingGame():
     Remember to think modular. Try to keep your functions small and single
     purpose if you can!
     """
-
     print("\nwelcome to the guessing game!")
     print("A number between _ and _ ?")
 

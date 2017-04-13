@@ -157,7 +157,6 @@ def diarist():
     TIP: remember to commit 'lasers.pew' and push it to your repo, otherwise
          the test will have nothing to look at.
     """
-
     laser = open("Trispokedovetiles(laser).gcode", "r")
     data_laser = laser.read()
     times_laser = data_laser.count("M10 P1")
