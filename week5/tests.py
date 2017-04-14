@@ -74,6 +74,7 @@ def theTests(path_to_code_to_check="."):
     testResults = []
 
     # stack the tests below here
+
     path = "{}/week{}/exercise1.py".format(path_to_code_to_check, WEEK_NUMBER)
     print(path)
 

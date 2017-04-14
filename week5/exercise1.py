@@ -40,7 +40,6 @@ def countdown(message, start, stop, completion_message):
 
 def calculate_hypotenuse(base, height):
     """Calculate the hypotenuse."""
-    # global hypotenuse
     hypotenuse = (base**2 + height**2)**0.5
 
     return hypotenuse
@@ -48,7 +47,6 @@ def calculate_hypotenuse(base, height):
 
 def calculate_area(base, height):
     """Calculate the area."""
-    # global area
     area = base * height / 2
 
     return area
@@ -56,7 +54,6 @@ def calculate_area(base, height):
 
 def calculate_perimeter(base, height):
     """Calculate the perimeter."""
-    # global perimeter
     hypotenuse = calculate_hypotenuse(base, height)
     perimeter = base + height + hypotenuse
 
