@@ -156,7 +156,7 @@ def triangle_master(base,
         else:
             return wide
     elif return_dictionary:
-        return {"facts": facts_dictionary, "units": "mm"}
+        return {"facts": facts_dictionary}
     else:
         print("You're an odd one, you don't want anything!")
 
