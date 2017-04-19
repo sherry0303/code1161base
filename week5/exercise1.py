@@ -90,7 +90,6 @@ def get_triangle_facts(base, height, units="mm"):
 
 def tell_me_about_this_right_triangle(facts_dictionary):
     """Draw the triangle."""
-    global tall, wide, equal, facts
     tall = """
             {height}
             |
@@ -122,12 +121,12 @@ def tell_me_about_this_right_triangle(facts_dictionary):
     facts = pattern.format(**facts_dictionary)
 
     if aspect == "tall":
-        return tall
+        shape = tall
     elif aspect == "equal":
-        return equal
+        shape = equal
     else:
-        return wide
-    return facts
+        shape = wide
+    return shape + facts
 
 
 def triangle_master(base,
@@ -135,23 +134,12 @@ def triangle_master(base,
                     return_diagram=False,
                     return_dictionary=False):
     """Show a triangle's information set by user."""
-    global facts_dictionary
     facts_dictionary = get_triangle_facts(base, height, units="mm")
+    diagram_facts = tell_me_about_this_right_triangle(facts_dictionary)
     if return_diagram and return_dictionary:
-        if aspect == "tall":
-            shape = tall
-        elif aspect == "equal":
-            shape = equal
-        else:
-            shape = wide
-        return {"diagram": shape, "facts": facts_dictionary}
+        return {"diagram": diagram_facts, "facts": facts_dictionary}
     elif return_diagram:
-        if aspect == "tall":
-            return tall
-        elif aspect == "equal":
-            return equal
-        else:
-            return wide
+        return diagram_facts
     elif return_dictionary:
         return {"facts": facts_dictionary}
     else:
@@ -165,8 +153,8 @@ def wordy_pyramid():
     and print a pyramid start with a word length of 3 to 20 and ends with a
     4-letter word. The steps between levels should be 2 letters.
     """
-    pyramid_list = list_of_words_with_lengths(list(range(3, 21, 2)) +
-                                              list(range(20, 3, -2)))
+    pyramid_list = list_of_words_with_lengths(range(3, 21, 2) +
+                                              range(20, 3, -2))
 
     return pyramid_list
 
