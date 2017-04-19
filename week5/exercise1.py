@@ -144,16 +144,19 @@ def triangle_master(base,
                     return_diagram=False,
                     return_dictionary=False):
     """Return diagram or dictionary."""
-    dictionary = get_triangle_facts(base, height, units='mm')
-    if not return_diagram and not return_dictionary:
-        return (tell_me_about_this_right_triangle(dictionary), '\n',
-                dictionary)
-    elif not return_diagram:
-        return tell_me_about_this_right_triangle(dictionary)
-    elif not return_dictionary:
-        return dictionary
+    dict = get_triangle_facts(base, height, units='mm')
+    triangle_master = {'diagram': None, 'facts': None}
+    if return_diagram and return_dictionary:
+        triangle_master['diagram'] = tell_me_about_this_right_triangle(dict)
+        triangle_master['facts'] = dict
+        return triangle_master
+    elif return_diagram:
+        return tell_me_about_this_right_triangle(dict)
+    elif return_dictionary:
+        triangle_master['facts'] = dict
+        return triangle_master
     else:
-        print("You're an odd one, you don't want anything!")
+        return None
 
 
 def wordy_pyramid():
