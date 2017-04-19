@@ -84,14 +84,20 @@ def calculate_aspect(base, height):
 
 def get_triangle_facts(base, height, units="mm"):
     """Return triangle details."""
-    triangle_details = {"area": calculate_area(base, height),
-                        "perimeter": calculate_perimeter(base, height),
-                        "height": height,
-                        "base": base,
-                        "hypotenuse": calculate_hypotenuse(base, height),
-                        "aspect": calculate_aspect(base, height),
-                        "units": units}
-    return triangle_details
+    # triangle_details = {"area": calculate_area(base, height),
+    #                     "perimeter": calculate_perimeter(base, height),
+    #                     "height": height,
+    #                     "base": base,
+    #                     "hypotenuse": calculate_hypotenuse(base, height),
+    #                     "aspect": calculate_aspect(base, height),
+    #                     "units": units}
+    return {"area": calculate_area(base, height),
+            "perimeter": calculate_perimeter(base, height),
+            "height": height,
+            "base": base,
+            "hypotenuse": calculate_hypotenuse(base, height),
+            "aspect": calculate_aspect(base, height),
+            "units": units}
 
 
 def tell_me_about_this_right_triangle(facts_dictionary):
@@ -123,10 +129,10 @@ def tell_me_about_this_right_triangle(facts_dictionary):
     pattern = ("This triangle is {area}{units}²\n"
                "It has a perimeter of {perimeter}{units}\n"
                "This is a {aspect} triangle.\n")
-
     facts = pattern.format(**facts_dictionary)
     if facts_dictionary['aspect'] == 'tall':
-        return (tall.format(**facts_dictionary) + '\n' + facts)
+        tall_triangle = (tall.format(**facts_dictionary) + '\n' + facts)
+        return tall_triangle
     elif facts_dictionary['aspect'] == 'wide':
         return (wide.format(**facts_dictionary) + '\n' + facts)
     else:
@@ -135,16 +141,16 @@ def tell_me_about_this_right_triangle(facts_dictionary):
 
 def triangle_master(base,
                     height,
-                    return_diagram=True,
-                    return_dictionary=True):
+                    return_diagram=False,
+                    return_dictionary=False):
     """Return diagram or dictionary."""
     dictionary = get_triangle_facts(base, height, units='mm')
-    if return_diagram and return_dictionary:
+    if not return_diagram and not return_dictionary:
         return (tell_me_about_this_right_triangle(dictionary), '\n',
                 dictionary)
-    elif return_diagram:
+    elif not return_diagram:
         return tell_me_about_this_right_triangle(dictionary)
-    elif return_dictionary:
+    elif not return_dictionary:
         return dictionary
     else:
         print("You're an odd one, you don't want anything!")
@@ -152,16 +158,22 @@ def triangle_master(base,
 
 def wordy_pyramid():
     """Get a word pyramid."""
-    length_list = range(3, 21, 2) + range(20, 3, -2)
-    list_of_words_with_lengths(length_list)
+    list_of_lengths = range(3, 21, 2) + range(20, 3, -2)
+    return list_of_words_with_lengths(list_of_lengths)
 
 
 def get_a_word_of_length_n(length):
     """Get a word with length n."""
     import requests
     URL = "http://www.setgetgo.com/randomword/get.php?len="
-    message = (requests.get(URL + str(length))).text
-    return message
+    if type(length) is int:
+        if length == 0:
+            return None
+        else:
+            message = (requests.get(URL + str(length))).text
+            return message
+    else:
+        return None
 
 
 def list_of_words_with_lengths(list_of_lengths):
