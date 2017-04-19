@@ -28,9 +28,6 @@ from __future__ import division
 from __future__ import print_function
 
 
-# This is a terrible function. The rest of the functions in this file do a
-# much better job of what it's trying to do. Once you've has a little look,
-# move on, and eventually delete this function. (And this comment!)
 def do_bunch_of_bad_things():
     """Right-angled triangle details and time countdown."""
     for i in countdown('Getting ready to start in ', 9, 1, "Let's go!"):
@@ -44,30 +41,19 @@ def do_bunch_of_bad_things():
     print(calculate_hypotenuse(40, 30))
 
 
-# return a lit of countdown messages, much like in the bad function above.
-# It should say something different in the last message.
 def countdown(message, start, stop, completion_message):
     """countdown."""
     countdown_message = []
-    if start < stop:
+    if start < stop:    # exchange values
         temp = stop
         stop = start
         start = temp
-    for i in range(start, stop, -1):
+    for i in range(start, stop, -1):    # loop in a descending list
         countdown_message.append(message + ' ' + str(i))
     countdown_message.append(completion_message)
     return countdown_message
 
 
-# TRIANGLES
-
-# This should be a series of functions that are ultimatly used by
-# triangle_master
-# It should eventually return a dictionary of triangle facts. It should
-# optionally print information as a nicely formatted string. Make printing
-# turned off by default but turned on with an optional argument.
-# The stub functions are made for you, and each one is tested, so this should
-# hand hold quite nicely.
 def calculate_hypotenuse(base, height):
     """Calculate hypotenuse."""
     hypotenuse = (base**2 + height**2)**0.5
@@ -96,8 +82,6 @@ def calculate_aspect(base, height):
         return 'equal'
 
 
-# Make sure you reuse the functions you've already got
-# Don't reinvent the wheel
 def get_triangle_facts(base, height, units="mm"):
     """Return triangle details."""
     triangle_details = {"area": calculate_area(base, height),
@@ -110,22 +94,6 @@ def get_triangle_facts(base, height, units="mm"):
     return triangle_details
 
 
-# this should return a multi line string that looks a bit like this:
-#
-# 15
-# |
-# |     |\
-# |____>| \  17.0
-#       |  \
-#       |   \
-#       ------
-#       8
-# This triangle is 60.0mm²
-# It has a perimeter of 40.0mm
-# This is a tall triangle.
-#
-# but with the values and shape that relate to the specific
-# triangle we care about.
 def tell_me_about_this_right_triangle(facts_dictionary):
     """Return a muti--line string."""
     tall = """
