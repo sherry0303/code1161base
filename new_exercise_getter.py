@@ -14,8 +14,8 @@ def get_the_updates():
     base = ("https://raw.githubusercontent.com/"
             "notionparallax/code1161base/master")
     new_files = [
-        "/week2/exercise0.py",
-        "/week4/IOexamples.py",
+        # "/week2/exercise0.py",
+        # "/week4/IOexamples.py",
         "/week5/exercise1.py",
         "/week5/exercise2.py",
         # "/week5/exercise4.py",
