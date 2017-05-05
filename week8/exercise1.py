@@ -173,7 +173,6 @@ def fast_filler(number_of_words=200):
     with open(file_path) as f:
         json_data = f.read()
     words = json.loads(json_data)
-    # words = {int(k) for k in words.keys()}
     time.time()
     para = ''
     import random
