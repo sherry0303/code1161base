@@ -151,7 +151,6 @@ def random_filler_text(number_of_words=200):
         if i == 0:
             word = word.title()
         para = (para + ' ' + word)
-    print (para.strip() + '.')
     return (para.strip() + '.')
 
 
@@ -170,11 +169,16 @@ def fast_filler(number_of_words=200):
     # import os
     import json
     # LOCAL = os.path.dirname(os.path.realpath(__file__))
-    file_path = "dict_racey.words"
+    file_path = "week8/dict_racey.words"
     dumped = json.dumps(make_filler_text_dictionary())
-    words = open(file_path, 'r+')
-    words.write(dumped)
-    words.close()
+    with open(file_path, 'w') as words:
+        words.write(dumped)
+    with open(file_path) as f:
+        json_data = f.read()
+    words = json.loads(json_data)
+    words = {int(k) for k in words.keys()}
+    print (time.time())
+    return random_filler_text(number_of_words)
 
 
 if __name__ == '__main__':
