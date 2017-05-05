@@ -148,8 +148,11 @@ def random_filler_text(number_of_words=200):
         word_len = random.randint(3, 7)
         word_index = random.randint(0, 2)
         word = text_dic[word_len][word_index]
+        if i == 0:
+            word = word.title()
         para = (para + ' ' + word)
-    return para.strip()
+    print (para.strip() + '.')
+    return (para.strip() + '.')
 
 
 def fast_filler(number_of_words=200):
@@ -164,10 +167,14 @@ def fast_filler(number_of_words=200):
     into and out of the file. Be careful when you read it back in, it'll
     convert integer keys to strings.
     """
-    import os
-    LOCAL = os.path.dirname(os.path.realpath(__file__))
-    with open(LOCAL + "dict_racey.words") as f:
-        json_dumps(f, make_filler_text_dictionary())
+    # import os
+    import json
+    # LOCAL = os.path.dirname(os.path.realpath(__file__))
+    file_path = "dict_racey.words"
+    dumped = json.dumps(make_filler_text_dictionary())
+    words = open(file_path, 'r+')
+    words.write(dumped)
+    words.close()
 
 
 if __name__ == '__main__':
