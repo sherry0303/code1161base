@@ -147,16 +147,13 @@ def random_filler_text(number_of_words=200):
            capital letter and end with a full stop.
     """
     import random
-    list_of_word = []
+    paragraph = ""
     for i in range(number_of_words):
         list_dictionary = random.choice(make_filler_text_dictionary().keys())
         word_list = random.choice(make_filler_text_dictionary()
                                   [list_dictionary])
-        list_of_word.append(word_list)
-
-    paragraph = " ".join(list_of_word)
-    paragraph.title()
-    paragraph += ""
+        paragraph += word_list
+    paragraph += "."
     return paragraph
 
 
@@ -172,7 +169,8 @@ def fast_filler(number_of_words=200):
     into and out of the file. Be careful when you read it back in, it'll
     convert integer keys to strings.
     """
-    pass
+    new_file = open("dict_racey.words", "w")
+    new_file.write(make_filler_text_dictionary())
 
 
 if __name__ == '__main__':
