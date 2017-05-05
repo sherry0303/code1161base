@@ -165,9 +165,9 @@ def fast_filler(number_of_words=200):
     convert integer keys to strings.
     """
     import os
-    with open(LOCAL + 'dict_racey.words') as f:
-        json_data = f.write()
-data = json.loads(json_data)
+    LOCAL = os.path.dirname(os.path.realpath(__file__))
+    with open(LOCAL + "dict_racey.words") as f:
+        json_dumps(f, make_filler_text_dictionary())
 
 
 if __name__ == '__main__':
