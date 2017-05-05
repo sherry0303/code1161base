@@ -123,8 +123,7 @@ def make_filler_text_dictionary():
     for i in range(3, 8):
         text_list = []
         for j in range(3):
-            word = requests.get(url + str(i))
-            text_list.append((word.text))
+            text_list.append((requests.get(url + str(i)).text))
         dic[i] = text_list
     return dic
 
@@ -166,19 +165,26 @@ def fast_filler(number_of_words=200):
     into and out of the file. Be careful when you read it back in, it'll
     convert integer keys to strings.
     """
-    # import os
     import json
-    # LOCAL = os.path.dirname(os.path.realpath(__file__))
     file_path = "week8/dict_racey.words"
-    dumped = json.dumps(make_filler_text_dictionary())
-    with open(file_path, 'w') as words:
-        words.write(dumped)
+    # dumped = json.dumps(make_filler_text_dictionary())
+    # with open(file_path, 'w') as words:
+    #     words.write(dumped)
     with open(file_path) as f:
         json_data = f.read()
     words = json.loads(json_data)
-    words = {int(k) for k in words.keys()}
-    print (time.time())
-    return random_filler_text(number_of_words)
+    # words = {int(k) for k in words.keys()}
+    time.time()
+    para = ''
+    import random
+    for i in range(number_of_words):
+        word_len = random.randint(3, 7)
+        word_index = random.randint(0, 2)
+        word = words[str(word_len)][word_index]
+        if i == 0:
+            word = word.title()
+        para = (para + ' ' + word)
+    return (para.strip() + '.')
 
 
 if __name__ == '__main__':
