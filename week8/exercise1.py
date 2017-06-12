@@ -122,13 +122,12 @@ def make_filler_text_dictionary():
     TIP: you'll need the requests library
     """
     import requests
-    half_url = "http://www.setgetgo.com/randomword/get.php"
+    half_url = "http://www.setgetgo.com/randomword/get.php?len="
     dictionary = {}
     for i in range(3, 8):
         list_words = []
         for j in range(3):
-            r = requests.get(half_url + "?len=" + str(i))
-            list_words.append(r.text)
+            list_words.append(requests.get(half_url + str(i)).text)
         dictionary[i] = list_words
 
     return dictionary
@@ -148,11 +147,16 @@ def random_filler_text(number_of_words=200):
     """
     import random
     paragraph = ""
-    for i in range(number_of_words):
-        list_dictionary = random.choice(make_filler_text_dictionary().keys())
-        word_list = random.choice(make_filler_text_dictionary()
-                                  [list_dictionary])
-        paragraph += word_list
+    dictionary = make_filler_text_dictionary()
+    list_choices = list(i in value for key, value in dictionary.items())
+    print(list_choices)
+    for i in range(3):
+        word = random.choice(list_choices)
+        # word_list = random.choice(make_filler_text_dictionary()
+        #                           [list_dictionary])
+        # paragraph += word_list
+        print(word)
+        paragraph += word
     paragraph += "."
     return paragraph
 
