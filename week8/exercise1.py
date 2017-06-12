@@ -130,7 +130,6 @@ def make_filler_text_dictionary():
             r = requests.get(half_url + "?len=" + str(i))
             list_words.append(r.text)
         dictionary[i] = list_words
-
     return dictionary
 
 
